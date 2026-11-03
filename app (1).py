@@ -10,7 +10,7 @@ Menjalankan:
 
 Offline:
     Semua konten (doa, dalil, jadwal, cuaca normal) tertanam di file ini.
-    Internet hanya dipakai saat menekan "Ambil ramalan cuaca terbaru".
+    Internet hanya dipakai saat menekan "Ambil perkiraan cuaca terbaru".
     Ramalan terakhir disimpan ke umrah_weather_cache.json, jadi tetap tampil saat offline.
     Centang, hitungan tawaf/sa'i, dan data rombongan disimpan ke umrah_progress.json.
 """
@@ -253,7 +253,7 @@ def fetch_forecast() -> tuple[bool, str]:
         return False, f"Gagal mengambil ramalan (cek koneksi internet): {e}"
     save_json(WX_CACHE_FILE, out)
     st.session_state.pop("wxcache", None)
-    return True, "Ramalan cuaca diperbarui."
+    return True, "perkiraan cuaca diperbarui."
 
 
 def wx_cache():
@@ -326,7 +326,7 @@ def sidebar() -> None:
 
     st.sidebar.divider()
     st.sidebar.subheader("Cuaca")
-    if st.sidebar.button("Ambil ramalan cuaca terbaru", use_container_width=True):
+    if st.sidebar.button("Ambil perkiraan cuaca terbaru", use_container_width=True):
         ok, msg = fetch_forecast()
         (st.sidebar.success if ok else st.sidebar.error)(msg)
     f = wx_cache().get("fetched")
